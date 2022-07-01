@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Game');
     }
 
-    public function gamesAsParticipant(){
-        return $this->belongsToMany('App\Models\Game');
+    public function gamesAsBuyer(){
+        return $this->belongsToMany('App\Models\Game', 'game_user');
     }
 }

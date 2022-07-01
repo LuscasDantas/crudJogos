@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\GameUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -64,36 +66,28 @@ class GameController extends Controller
 
         $game = Game::findOrFail($id);
 
-        return view('games.show', ['game' => $game]);
+        $user = auth()->user();
+
+        $hasUserBought = false;
+
+        if($user) {
+
+            $usergames = $user->gamesBuyer->toArray();
+
+            foreach($usergames as $userGame) {
+                if($userGame['id'] == $id) {
+                    $hasUserBought = true;
+                }
+            }
+
+        }
+
+        $gameOwner = User::where('id', $game->user_id)->first()->toArray();
+
+        return view('games.show', 
+            ['game' => $game, 'gameOwner' => $gameOwner, 'hasUserBought' => $hasUserBought]);
         
     }
-
-    // public function show($id) {
-
-    //     $game = Game::findOrFail($id);
-
-    //     $user = auth()->user();
-
-    //     $hasUserJoined = false;
-
-    //     if($user) {
-
-    //         $usergames = $user->gamesAsParticipant->toArray();
-
-    //         foreach($usergames as $userGame) {
-    //             if($userGame['id'] == $id) {
-    //                 $hasUserJoined = true;
-    //             }
-    //         }
-
-    //     }
-
-    //     $gameOwner = User::where('id', $game->user_id)->first()->toArray();
-
-    //     return view('games.show', 
-    //         ['game' => $game, 'gameOwner' => $gameOwner, 'hasUserJoined' => $hasUserJoined]);
-        
-    // }
 
     public function dashboard() {
 
@@ -101,78 +95,73 @@ class GameController extends Controller
 
         $games = $user->games;
 
-        // $gamesAsParticipant = $user->gamesAsParticipant;
+        $gamesAsbuyer = $user->gamesAsbuyer;
 
-        return view('games.dashboard', ['games' => $games]);
+        return view('games.dashboard', ['games' => $games, 'gamesAsBuyer' => $gamesAsbuyer]);
 
     }
 
-    // public function destroy($id) {
+    public function destroy($id) {
 
-    //     Game::findOrFail($id)->delete();
+        Game::findOrFail($id)->delete();
 
-    //     return redirect('/dashboard')->with('message', 'Jogo excluído com sucesso!');
+        return redirect('/dashboard')->with('message', 'Jogo excluído com sucesso!');
 
-    // }
+    }
 
-    // public function edit($id) {
+    public function edit($id) {
 
-    //     $game = Game::findOrFail($id);
+        $game = Game::findOrFail($id);
 
-    //     if(auth()->user()->id != $game->user_id){
-    //         return redirect('/dashboard');
-    //     }
+        if(auth()->user()->id != $game->user_id){
+            return redirect('/dashboard');
+        }
 
-    //     return view('games.edit', ['game' => $game]);
+        return view('games.edit', ['game' => $game]);
 
-    // }
+    }
 
-    // public function update(Request $request) {
+    public function update(Request $request) {
 
-    //     $data = $request->all();
+        $data = $request->all();
 
-    //     // Image Upload
-    //     if($request->hasFile('image') && $request->file('image')->isValid()) {
+        // Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
 
-    //         $requestImage = $request->image;
+            $requestImage = $request->image;
 
-    //         $extension = $requestImage->extension();
+            $extension = $requestImage->extension();
 
-    //         $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
-    //         $requestImage->move(public_path('images/games'), $imageName);
+            $requestImage->move(public_path('images/games'), $imageName);
 
-    //         $data['image'] = $imageName;
+            $data['image'] = $imageName;
 
-    //     }
+        }
 
-    //     Game::findOrFail($request->id)->update($data);
+        Game::findOrFail($request->id)->update($data);
 
-    //     return redirect('/dashboard')->with('message', 'Jogo editado com sucesso!');
+        return redirect('/dashboard')->with('message', 'Jogo editado com sucesso!');
 
-    // }
+    }
 
-    // public function joinEvent($id) {
+    public function buyGame($id) {
 
-    //     $user = auth()->user();
+        GameUser::create(['user_id' => auth()->user()->id, 'game_id' => $id]);
 
-    //     $user ->gamesAsParticipant()->attach($id);
+        $game = Game::findOrFail($id);
 
-    //     $event = Event::findOrFail($id);
+        return redirect('/dashboard')->with('message', 'Compra de' . $game->title . 'efetuada com sucesso ');
 
-    //     return redirect('/dashboard')->with('message', 'Sua presença está confirmada no evento ' . $event->title);
+    }
 
-    // }
+    public function leaveGame($id) {
 
-    // public function leaveEvent($id) {
+        GameUser::where(['user_id' => auth()->user()->id, 'game_id' => $id])->delete();
 
-    //     $user = auth()->user();
+        $game = Game::findOrFail($id);
 
-    //     $user->gamesAsParticipant()->detach($id);
-
-    //     $event = Event::findOrFail($id);
-
-    //     return redirect('/dashboard')->with('message', 'Você saiu com sucesso do evento: ' . $event->title);
-
-    // }
+        return redirect('/dashboard')->with('message', 'Você desistiu da compra de' . $game->title);
+    }
 }

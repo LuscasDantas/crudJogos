@@ -21,12 +21,12 @@ Route::get('/', [GameController::class, 'index']);
 Route::get('/games/create', [GameController::class, 'create'])->middleware('auth');
 Route::get('/games/{id}', [GameController::class, 'show']);
 Route::post('/games', [GameController::class, 'store']);
-// Route::delete('/games/{id}', [GameController::class, 'destroy'])->middleware('auth');
-// Route::get('/games/edit/{id}', [GameController::class, 'edit'])->middleware('auth');
-// Route::put('/games/update/{id}', [GameController::class, 'update'])->middleware('auth');
+Route::delete('/games/{id}', [GameController::class, 'destroy'])->middleware('auth');
+Route::get('/games/edit/{id}', [GameController::class, 'edit'])->middleware('auth');
+Route::put('/games/update/{id}', [GameController::class, 'update'])->middleware('auth');
 
 Route::get('/dashboard', [GameController::class, 'dashboard'])->middleware('auth');
 
 // /*Jogos do Usuário*/
-// Route::post('/games/join/{id}', [GameController::class, 'joinEvent'])->middleware('auth');
-// Route::delete('/games/leave/{id}', [GameController::class, 'leaveEvent'])->middleware('auth');
+Route::post('/games/buy/{id}', [GameController::class, 'buyGame'])->middleware('auth');
+Route::delete('/games/leave/{id}', [GameController::class, 'leaveGame'])->middleware('auth');

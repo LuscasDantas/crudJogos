@@ -11,12 +11,14 @@ class Game extends Model
 
     public $table = 'games';
 
+    protected $guarded = [];
+
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
 
     public function users(){
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User', 'game_user');
     }
 
     /**

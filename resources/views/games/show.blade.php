@@ -13,21 +13,21 @@
         <h1>{{ $game->title }}</h1>
         <p class="game-city"><ion-icon name="location-outline"></ion-icon> {{ $game->price }}</p>
         <p class="games-participants"><ion-icon name="people-outline"></ion-icon>  Participantes</p>
-        <p class="game-owner"><ion-icon name="star-outline"></ion-icon> </p>
-        {{-- @if(!$hasUserJoined)
-        <form action="/games/join/{{ $game->id }}" method="POST">
+        <p class="game-owner"><ion-icon name="star-outline"></ion-icon> {{$gameOwner['name']}}</p>
+        @if(!$hasUserBought)
+        <form action="/games/buy/{{ $game->id }}" method="POST">
           @csrf
-          <a href="/games/join/{{ $game->id }}" 
+          <a href="/games/buy/{{ $game->id }}" 
             class="btn btn-primary" 
             id="game-submit"
             onclick="event.preventDefault();
             this.closest('form').submit();">
-            Confirmar Presença
+            Comprar
           </a>
         </form>
         @else
           <p class="already-joined-message">Você já está participando deste evento!</p>
-        @endif --}}
+        @endif
       <div class="col-md-12 mt-1" id="description-container">
         <h3>Descrição do jogo:</h3>
         <div class="col-md-12 p-0">
