@@ -1,0 +1,265 @@
+* {
+    font-family: 'Roboto';
+}
+
+body{
+    background-image: url("/images/background.jpg");
+    background-color: #078fce;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+header {
+    background-color: #FFF;
+    border-bottom: 1px solid #CCC;
+  }
+  
+  .row {
+    margin: 0;
+  }
+  
+  .container-fluid {
+    padding: 0;
+  }
+  
+  .btn-primary {
+    background-color: #14c45d;
+    border: 2px solid #03a360;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0be680;
+    border-color: #03a360;
+  }
+  
+  /* Navbar */
+  #navbar img {
+    width: 50px;
+    border-radius: 5px;
+    border-style: solid;
+  }
+  
+  #navbar {
+    justify-content: space-between;
+    padding: 5px 10px;
+    width: 100%;
+    background-color: #383a35;
+    color: white;
+  }
+  
+  #navbar a {
+    font-size: 14px;
+    color: white;
+  }
+  
+  #navbar a:hover {
+    color: #04d4f8;
+  }
+  
+  #greetings{
+    align-items: center;
+    color: #FFF;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
+    /* Search Container */
+    #search-container {
+      height: 400px;
+      padding: 50px;
+      text-align: center;
+    }
+    
+    #search-container h1 {
+      color: #FFF;
+      margin-bottom: 30px;
+      font-weight: 900;
+    }
+    
+    #search-container form {
+      width: 50%;
+      margin: 0 auto;
+    }
+    
+    /* Games list */
+    #games-container {
+      padding: 50px;
+    }
+    
+    #games-container h2 {
+      margin-bottom: 10px;
+    }
+    
+    #games-container .subtitle {
+      color: #757575;
+      margin-bottom: 30px;
+    }
+    
+    #cards-container {
+      display: flex;
+    }
+    
+    #games-container .card {
+      flex: 1 1 24%;
+      max-width: 25%;
+      border-radius: 10px;
+      padding: 0;
+      margin: .5%;
+    }
+
+    @media screen and (max-width: 600px){
+      #games-container .card {
+        flex: 1 1 24%;
+        max-width: 100%;
+        border-radius: 10px;
+        padding: 0;
+        margin: .5%;
+      }
+    }
+    
+    #games-container img {
+      max-height: 150px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    
+    .card .card-date {
+      font-size: 12px;
+      color: #CCC;
+    }
+    
+    .card .card-title {
+      color: #212121;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    
+    .card-participants {
+      font-size: 14px;
+      color: #757575;
+    }
+  
+    /* Game create page */
+  #game-create-container {
+      padding: 30px;
+      margin-top: 100px;
+      border:#212121 1px solid;
+      border-radius: 20px;
+      background-color: whitesmoke;
+    }
+    
+    #game-create-container label {
+      font-weight: bold;
+    }
+    
+    #game-create-container input,
+    #game-create-container select,
+    #game-create-container textarea {
+      font-size: 12px;
+    }
+  
+    /*Flash Messages*/
+    .message {
+      background-color: #D4EDDA;
+      color: #155724;
+      border: 1px solid #C3E6CB;
+      width: 100%;
+      margin-bottom: 0;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    #info-container .already-joined-message{
+      margin: 15px 0;
+      color: #004085;
+      background-color: #CCE5FF;
+      border: 1px solid #B8DAFF;
+      padding: 10px;
+      width: 275px;
+    }
+  
+    /* Game page */
+  #image-container,
+  #info-container {
+    margin-top: 30px;
+  }
+  
+  #gamePageCard{
+      padding: 30px;
+      margin-top: 100px;
+      border:#212121 1px solid;
+      border-radius: 20px;
+      background-color: rgb(15, 183, 224);
+  }
+  
+  #image-container img {
+    border-radius: 10px;
+  }
+  
+  #info-container h1 {
+    font-size: 36px;
+    font-weight: 900;
+  }
+  
+  #info-container p {
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+  }
+  
+  #info-container h3,
+  #description-container h3 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  #info-container ion-icon {
+    font-size: 20px;
+    color: #F2A340;
+    margin-right: 5px;
+  }
+  
+  #info-container #game-submit {
+    margin: 20px 0;
+  }
+  
+  /* Dashboard */
+  .dashboard-title-container {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+  
+  .dashboard-games-container th {
+    width: 25%;
+  }
+  
+  .dashboard-games-container form {
+    display:inline-block;
+  }
+  
+  /* Edit page */
+  
+  .img-preview {
+    width: 100px;
+    margin-top: 20px;
+  }
+
+   /* footer */
+   footer {
+    text-align: center;
+    background-color: #383a35;
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  footer p {
+    margin-bottom: 0;
+  }

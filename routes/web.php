@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Home
+Route::get('/', [GameController::class, 'index']);
+
+//Jogos
+Route::get('/games/create', [GameController::class, 'create'])->middleware('auth');
+Route::get('/games/{id}', [GameController::class, 'show']);
+Route::post('/games', [GameController::class, 'store']);
+// Route::delete('/games/{id}', [GameController::class, 'destroy'])->middleware('auth');
+// Route::get('/games/edit/{id}', [GameController::class, 'edit'])->middleware('auth');
+// Route::put('/games/update/{id}', [GameController::class, 'update'])->middleware('auth');
+
+Route::get('/dashboard', [GameController::class, 'dashboard'])->middleware('auth');
+
+// /*Jogos do Usuário*/
+// Route::post('/games/join/{id}', [GameController::class, 'joinEvent'])->middleware('auth');
+// Route::delete('/games/leave/{id}', [GameController::class, 'leaveEvent'])->middleware('auth');
