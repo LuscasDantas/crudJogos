@@ -1,6 +1,8 @@
 @php
     $options = \App\Models\Game::PLATAFORM;
     $translate = \App\Models\Game::PLATAFORM_TRANSLATE;
+    $status = \App\Models\Game::STATUS;
+
 @endphp
 @extends('layouts.master')
 

@@ -11,6 +11,21 @@ class Game extends Model
 
     public $table = 'games';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'plataform',
+        'kind',
+        'price',
+        'description',
+        'image',
+        'status'
+    ];
+
     protected $guarded = [];
 
     public function user(){
@@ -50,5 +65,14 @@ class Game extends Model
         'corrida',
         'aventura',
         'luta'
+    ];
+
+        /**
+     * STATUS constant
+     * @return array
+     */
+    const STATUS = [
+        'available',
+        'unavailable'
     ];
 }

@@ -22,10 +22,18 @@
                 <div class="card col-md-3">
                     <img src="/images/games/{{ $game->image }}" alt="{{ $game->title }}">
                     <div class="card-body">
-                        <p class="card-date">{{ $game->price }}</p>
                         <h5 class="card-title">{{ $game->title }}</h5>
-                        <p class="card-participants">20 Participantes</p>
-                        <a href="/games/{{ $game->id }}" class="btn btn-primary">Comprar</a>
+                        <div class="card_kind_price  mb-2">
+                            <p>Gênero: {{ $game->kind }}</p>
+                            <strong class="card-price">R$ {{ $game->price }}</strong>
+                        </div>
+                        <div id="card-status">
+                            <a href="/games/{{ $game->id }}" class="btn btn-primary">Comprar</a>
+                            <strong class="games-status" style="{{$game->status == 'available' ? 'color:green' : 'color:red'}}">
+                                <ion-icon name="checkmark-outline"></ion-icon>
+                                {{ $game->status == 'available' ? 'Disponível' : 'Indisponível' }}
+                            </strong>
+                        </div>
                     </div>
                 </div>
             @endforeach

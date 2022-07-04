@@ -72,7 +72,7 @@ class GameController extends Controller
 
         if($user) {
 
-            $usergames = $user->gamesBuyer->toArray();
+            $usergames = $user->gamesAsBuyer->toArray();
 
             foreach($usergames as $userGame) {
                 if($userGame['id'] == $id) {
